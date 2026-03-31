@@ -1,16 +1,19 @@
 <script lang="ts">
+  import { mdiPaw } from '$lib/icons/index.js';
   import type { Size } from '$lib/types.js';
   import { cleanClass } from '$lib/utilities/internal.js';
   import { tv } from 'tailwind-variants';
+  import Icon from '../Icon/Icon.svelte';
 
   type Props = {
     size?: Size;
     color?: 'primary' | 'pink' | 'red' | 'yellow' | 'blue' | 'green' | 'purple' | 'orange' | 'gray' | 'amber';
     name: string;
+    entityType?: 'user' | 'pet';
     class?: string;
   };
 
-  const { color = 'primary', size = 'medium', name, class: className }: Props = $props();
+  const { color = 'primary', size = 'medium', name, entityType = 'user', class: className }: Props = $props();
 
   const styles = tv({
     base: 'flex items-center overflow-hidden rounded-full align-middle text-white shadow-md',
@@ -47,8 +50,22 @@
   };
 
   const initials = $derived(getInitials(name));
+
+  const iconSize: Record<Size, string> = {
+    tiny: '0.8rem',
+    small: '1rem',
+    medium: '1.5rem',
+    large: '2rem',
+    giant: '2.5rem',
+  };
 </script>
 
 <figure class={cleanClass(styles({ size, color }), className)}>
-  <span class="w-full text-center font-medium select-none">{initials}</span>
+  {#if entityType === 'pet'}
+    <div class="flex h-full w-full items-center justify-center">
+      <Icon icon={mdiPaw} size={iconSize[size]} />
+    </div>
+  {:else}
+    <span class="w-full text-center font-medium select-none">{initials}</span>
+  {/if}
 </figure>
