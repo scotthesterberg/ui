@@ -1,5 +1,102 @@
 # Changelog
 
+## [0.77.1](https://github.com/immich-app/ui/compare/ui-v0.77.0...ui-v0.77.1) (2026-04-28)
+
+
+### Bug Fixes
+
+* markdown alert spacing ([#694](https://github.com/immich-app/ui/issues/694)) ([8b56d0f](https://github.com/immich-app/ui/commit/8b56d0fe219e420f544e50cd0b54a33a25016eb5))
+
+## [0.77.0](https://github.com/immich-app/ui/compare/ui-v0.76.2...ui-v0.77.0) (2026-04-28)
+
+
+### Features
+
+* admonition variants ([#693](https://github.com/immich-app/ui/issues/693)) ([f9228ee](https://github.com/immich-app/ui/commit/f9228ee5b91e931840bf093d3d4e588caddbea2c))
+* alert tweaks ([#691](https://github.com/immich-app/ui/issues/691)) ([06fd209](https://github.com/immich-app/ui/commit/06fd2099c4cb493900e8396a8ffd6a937e4c1764))
+
+## [0.76.2](https://github.com/immich-app/ui/compare/ui-v0.76.1...ui-v0.76.2) (2026-04-17)
+
+
+### Bug Fixes
+
+* **textarea:** dont resize textarea when its not visible ([#679](https://github.com/immich-app/ui/issues/679)) ([b6af0a5](https://github.com/immich-app/ui/commit/b6af0a5e697a969075bae0dbf333081d7b075eaf))
+
+## [0.76.1](https://github.com/immich-app/ui/compare/ui-v0.76.0...ui-v0.76.1) (2026-04-17)
+
+
+### Bug Fixes
+
+* command palette ([#681](https://github.com/immich-app/ui/issues/681)) ([38b9ed6](https://github.com/immich-app/ui/commit/38b9ed6c8a9903917b043a26969d0df400ef37aa))
+
+## [0.76.0](https://github.com/immich-app/ui/compare/ui-v0.75.0...ui-v0.76.0) (2026-04-10)
+
+
+### Features
+
+* docs ([#674](https://github.com/immich-app/ui/issues/674)) ([e0c0fa8](https://github.com/immich-app/ui/commit/e0c0fa8d21d5116bdb03ace4835b3291726e2b52))
+
+## [0.75.0](https://github.com/immich-app/ui/compare/ui-v0.74.1...ui-v0.75.0) (2026-04-09)
+
+
+### Features
+
+* system theme ([#671](https://github.com/immich-app/ui/issues/671)) ([6a11f6b](https://github.com/immich-app/ui/commit/6a11f6b1334ce25650db9f9632a1a6756136c128))
+
+## [0.74.1](https://github.com/immich-app/ui/compare/ui-v0.74.0...ui-v0.74.1) (2026-04-08)
+
+
+### Bug Fixes
+
+* github link size ([#669](https://github.com/immich-app/ui/issues/669)) ([ec28ac4](https://github.com/immich-app/ui/commit/ec28ac4bfb6307856eae51781f7328057bd0fe82))
+
+## [0.74.0](https://github.com/immich-app/ui/compare/ui-v0.73.0...ui-v0.74.0) (2026-04-08)
+
+
+### Features
+
+* github link ([#668](https://github.com/immich-app/ui/issues/668)) ([2f73975](https://github.com/immich-app/ui/commit/2f7397506c7c4d5fe68eee6f492805ab971d36a6))
+* time input ([#645](https://github.com/immich-app/ui/issues/645)) ([9c96c25](https://github.com/immich-app/ui/commit/9c96c256ef41698e9069fe9016a49bf5647c90e8))
+
+## [0.73.0](https://github.com/immich-app/ui/compare/ui-v0.72.0...ui-v0.73.0) (2026-04-07)
+
+
+### Features
+
+* theme manager ([#665](https://github.com/immich-app/ui/issues/665)) ([7820111](https://github.com/immich-app/ui/commit/7820111e6870a28ed413a4a39fe87abd1333b525))
+
+
+### Bug Fixes
+
+* **deps:** update typescript-projects ([#662](https://github.com/immich-app/ui/issues/662)) ([4d04003](https://github.com/immich-app/ui/commit/4d0400311f65e961ac49e03cf21acb7316d356d3))
+
+## [0.72.0](https://github.com/immich-app/ui/compare/ui-v0.71.0...ui-v0.72.0) (2026-04-06)
+
+
+### Features
+
+* shortcut rendering ([#660](https://github.com/immich-app/ui/issues/660)) ([e4be19f](https://github.com/immich-app/ui/commit/e4be19ff6984cb189da6ac8805f5514b9217913d))
+
+## [0.71.0](https://github.com/immich-app/ui/compare/ui-v0.70.0...ui-v0.71.0) (2026-04-06)
+
+
+### Features
+
+* persisted ([#656](https://github.com/immich-app/ui/issues/656)) ([73afb79](https://github.com/immich-app/ui/commit/73afb79c2eddf88b69f122a1e64e9ccb239b3899))
+* screencast overlay ([#658](https://github.com/immich-app/ui/issues/658)) ([f8bf709](https://github.com/immich-app/ui/commit/f8bf709cfa882967b6bf32af22c87c75df102053))
+
+## [0.70.0](https://github.com/immich-app/ui/compare/ui-v0.69.0...ui-v0.70.0) (2026-03-31)
+
+
+### Features
+
+* markdown image caption ([#654](https://github.com/immich-app/ui/issues/654)) ([fb7e9ae](https://github.com/immich-app/ui/commit/fb7e9aea1f29dbdc20ed49e8d288ab705b6c3254))
+
+
+### Bug Fixes
+
+* scrollbar ui theme colors ([#652](https://github.com/immich-app/ui/issues/652)) ([0088068](https://github.com/immich-app/ui/commit/0088068d0758c55db9c4da952b3fdd6a8f4c5399))
+
 ## [0.69.0](https://github.com/immich-app/ui/compare/ui-v0.68.0...ui-v0.69.0) (2026-03-26)
 
 

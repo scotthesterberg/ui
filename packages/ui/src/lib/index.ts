@@ -36,6 +36,7 @@ export { default as Checkbox } from '$lib/components/Checkbox/Checkbox.svelte';
 export { default as CloseButton } from '$lib/components/CloseButton/CloseButton.svelte';
 export { default as Code } from '$lib/components/Code/Code.svelte';
 export { default as CodeBlock } from '$lib/components/CodeBlock/CodeBlock.svelte';
+export { default as CommandPaletteButton } from '$lib/components/CommandPalette/CommandPaletteButton.svelte';
 export { default as CommandPaletteDefaultProvider } from '$lib/components/CommandPalette/CommandPaletteDefaultProvider.svelte';
 export { default as CommandPaletteProvider } from '$lib/components/CommandPalette/CommandPaletteProvider.svelte';
 export { default as ConfirmModal } from '$lib/components/ConfirmModal/ConfirmModal.svelte';
@@ -51,6 +52,7 @@ export { default as DatePicker } from '$lib/components/DatePicker/DatePicker.sve
 export { default as Field } from '$lib/components/Field/Field.svelte';
 export { default as FormatBytes } from '$lib/components/FormatBytes/FormatBytes.svelte';
 export { default as FormModal } from '$lib/components/FormModal/FormModal.svelte';
+export { default as GithubLink } from '$lib/components/GithubLink/GithubLink.svelte';
 export { default as Heading } from '$lib/components/Heading/Heading.svelte';
 export { default as HelperText } from '$lib/components/HelperText/HelperText.svelte';
 export { default as Icon } from '$lib/components/Icon/Icon.svelte';
@@ -76,6 +78,7 @@ export { default as NumberInput } from '$lib/components/NumberInput/NumberInput.
 export { default as PasswordInput } from '$lib/components/PasswordInput/PasswordInput.svelte';
 export { default as PinInput } from '$lib/components/PinInput/PinInput.svelte';
 export { default as ProgressBar } from '$lib/components/ProgressBar/ProgressBar.svelte';
+export { default as ScreencastOverlay } from '$lib/components/ScreencastOverlay/ScreencastOverlay.svelte';
 export { default as Scrollable } from '$lib/components/Scrollable/Scrollable.svelte';
 export { default as Select } from '$lib/components/Select/Select.svelte';
 export { default as SiteMetadata } from '$lib/components/SiteMetadata/SiteMetadata.svelte';
@@ -94,6 +97,7 @@ export { default as TableRow } from '$lib/components/Table/TableRow.svelte';
 export { default as Text } from '$lib/components/Text/Text.svelte';
 export { default as Textarea } from '$lib/components/Textarea/Textarea.svelte';
 export { default as ThemeSwitcher } from '$lib/components/ThemeSwitcher/ThemeSwitcher.svelte';
+export { default as TimeInput } from '$lib/components/TimeInput/TimeInput.svelte';
 export { default as Toast } from '$lib/components/Toast/Toast.svelte';
 export { default as ToastContainer } from '$lib/components/Toast/ToastContainer.svelte';
 export { default as ToastContent } from '$lib/components/Toast/ToastContent.svelte';
@@ -103,10 +107,12 @@ export { default as TooltipProvider } from '$lib/components/Tooltip/TooltipProvi
 
 // helpers
 export * from '$lib/actions/shortcut.js';
+export * from '$lib/commands.js';
 export * from '$lib/services/command-palette-manager.svelte.js';
 export * from '$lib/services/menu-manager.svelte.js';
 export * from '$lib/services/modal-manager.svelte.js';
-export * from '$lib/services/theme.svelte.js';
+export * from '$lib/services/screencast-manager.svelte.js';
+export * from '$lib/services/theme-manager.svelte.js';
 export * from '$lib/services/toast-manager.svelte.js';
 export * from '$lib/services/translation.svelte.js';
 export * from '$lib/state/locale-state.svelte.js';

@@ -62,13 +62,14 @@
 
   const groupedCommands = $derived(
     commandPaletteManager.results.reduce(
-      (acc, { provider: { name = 'unnamed' }, items }) => {
-        if (acc[name]) {
-          acc[name].push(...items);
-        } else {
-          acc[name] = items;
+      (groups, { provider: { name = 'unnamed' }, items }) => {
+        if (!groups[name]) {
+          groups[name] = [];
         }
-        return acc;
+
+        groups[name].push(...items);
+
+        return groups;
       },
       {} as Record<string, Array<ActionItem & { id: string }>>,
     ),
@@ -87,7 +88,7 @@
   ]}
 />
 
-<Modal size="large" {onClose} closeOnBackdropClick focusOnOpen class="max-h-[85vh] lg:max-h-[75vh]">
+<Modal size="large" {onClose} closeOnBackdropClick focusOnOpen class="md:max-h-[85vh] lg:max-h-[75vh]">
   <ModalHeader>
     <div class="flex place-items-center gap-1">
       <Input

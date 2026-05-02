@@ -2,19 +2,22 @@ import { goto } from '$app/navigation';
 import { asComponentHref } from '$docs/utilities.js';
 import {
   asText,
+  defaultProvider,
+  linkCommands,
   MenuItemType,
   toastManager,
   type ActionItem,
   type ActionItemHandler,
   type CarouselImageItem,
+  type IconLike,
   type MenuItems,
   type Theme,
 } from '@immich/ui';
 import {
   mdiAccountCircle,
   mdiAccountCircleOutline,
-  mdiAlertCircle,
-  mdiAlertCircleOutline,
+  mdiAlert,
+  mdiAlertOutline,
   mdiApplication,
   mdiApplicationOutline,
   mdiBullhornVariant,
@@ -28,6 +31,8 @@ import {
   mdiCheckboxMultipleMarked,
   mdiCheckboxMultipleMarkedOutline,
   mdiCheckboxOutline,
+  mdiClock,
+  mdiClockOutline,
   mdiCloseCircle,
   mdiCloseCircleOutline,
   mdiCodeBlockBraces,
@@ -83,6 +88,7 @@ import {
   mdiViewSequentialOutline,
   mdiWindowMaximize,
 } from '@mdi/js';
+import { siGithub } from 'simple-icons';
 import type { Component } from 'svelte';
 
 export enum DisplayOption {
@@ -101,7 +107,7 @@ export type ExampleItem = {
 export type ExampleCardProps = ExampleItem;
 
 export const siteMetadata = {
-  title: '@immich/ui',
+  title: 'Immich UI',
   description: 'A Svelte component library for Immich',
 };
 
@@ -109,7 +115,7 @@ export type ComponentItem = {
   name: string;
   title?: string;
   href?: string;
-  icon: string;
+  icon: IconLike;
   activeIcon?: string;
   items?: ComponentItem[];
 };
@@ -119,106 +125,81 @@ export type ComponentGroup = {
   components: ComponentItem[];
 };
 
-export const componentGroups: ComponentGroup[] = [
+export const components: ComponentItem[] = [
+  { name: 'AnnouncementBanner', icon: mdiBullhornVariantOutline, activeIcon: mdiBullhornVariant },
+  { name: 'AppShell', icon: mdiApplicationOutline, activeIcon: mdiApplication },
+  { name: 'Alert', icon: mdiAlertOutline, activeIcon: mdiAlert },
+  { name: 'Avatar', icon: mdiAccountCircleOutline, activeIcon: mdiAccountCircle },
+  { name: 'Badge', icon: mdiTagOutline, activeIcon: mdiTag },
+  { name: 'Breadcrumbs', icon: mdiSlashForward },
   {
-    title: 'Layout',
-    components: [
-      { name: 'Alert', icon: mdiAlertCircleOutline, activeIcon: mdiAlertCircle },
-      { name: 'AnnouncementBanner', icon: mdiBullhornVariantOutline, activeIcon: mdiBullhornVariant },
-      { name: 'AppShell', icon: mdiApplicationOutline, activeIcon: mdiApplication },
-      { name: 'Breadcrumbs', icon: mdiSlashForward },
-      { name: 'Card', icon: mdiCardOutline, activeIcon: mdiCard },
-      { name: 'Container', icon: mdiSquareOutline, activeIcon: mdiSquare },
-      { name: 'ContextMenu', icon: mdiDotsVertical },
-      {
-        name: 'ControlBar',
-        icon: mdiApplicationOutline,
-        activeIcon: mdiApplication,
-        items: [{ name: 'ActionBar', icon: mdiCardOutline, activeIcon: mdiCard }],
-      },
-      { name: 'ImageCarousel', icon: mdiViewCarouselOutline, activeIcon: mdiViewCarousel },
-      {
-        name: 'Modal',
-        title: 'Modals',
-        icon: mdiWindowMaximize,
-        items: [
-          { name: 'BasicModal', icon: mdiWindowMaximize },
-          { name: 'ConfirmModal', icon: mdiCheckboxOutline },
-          { name: 'FormModal', icon: mdiWindowMaximize },
-        ],
-      },
-      { name: 'Navbar', icon: mdiMenu },
-      { name: 'Scrollable', icon: mdiPanVertical },
-      { name: 'Stack', icon: mdiViewSequentialOutline, activeIcon: mdiViewSequential },
-      { name: 'Table', icon: mdiTable },
-      { name: 'Toast', icon: mdiMessageAlertOutline, activeIcon: mdiMessageAlert },
-      { name: 'Tooltip', icon: mdiInformationSlabCircleOutline, activeIcon: mdiInformationSlabCircle },
+    name: 'Button',
+    title: 'Buttons',
+    icon: mdiButtonCursor,
+    items: [
+      { name: 'ActionButton', icon: mdiButtonPointer },
+      { name: 'CloseButton', icon: mdiCloseCircleOutline, activeIcon: mdiCloseCircle },
+      { name: 'IconButton', icon: mdiHomeCircleOutline, activeIcon: mdiHomeCircle },
+      { name: 'ListButton', icon: mdiButtonPointer },
     ],
   },
+  { name: 'Card', icon: mdiCardOutline, activeIcon: mdiCard },
+  { name: 'Checkbox', icon: mdiCheckboxOutline, activeIcon: mdiCheckboxMarked },
+  { name: 'Code', icon: mdiCodeBraces },
+  { name: 'CodeBlock', icon: mdiCodeBlockBraces },
+  { name: 'Colors', icon: mdiPalette },
+  { name: 'CommandPalette', icon: mdiMenu, activeIcon: mdiMenu },
+  { name: 'Container', icon: mdiSquareOutline, activeIcon: mdiSquare },
+  { name: 'ContextMenu', icon: mdiDotsVertical },
   {
-    title: 'Forms',
-    components: [
-      {
-        name: 'Button',
-        title: 'Buttons',
-        icon: mdiButtonCursor,
-        items: [
-          { name: 'ActionButton', icon: mdiButtonPointer },
-          { name: 'CloseButton', icon: mdiCloseCircleOutline, activeIcon: mdiCloseCircle },
-          { name: 'IconButton', icon: mdiHomeCircleOutline, activeIcon: mdiHomeCircle },
-          { name: 'ListButton', icon: mdiButtonPointer },
-        ],
-      },
-      { name: 'Checkbox', icon: mdiCheckboxOutline, activeIcon: mdiCheckboxMarked },
-      { name: 'Field', icon: mdiListBoxOutline, activeIcon: mdiListBox },
-      { name: 'HelperText', icon: mdiHelpBoxOutline, activeIcon: mdiHelpBox },
-      { name: 'Input', icon: mdiFormTextbox },
-      { name: 'Meter', icon: mdiGauge },
-      { name: 'NumberInput', icon: mdiNumeric },
-      { name: 'PasswordInput', icon: mdiFormTextboxPassword },
-      { name: 'PinInput', icon: mdiLockSmart },
-      { name: 'ProgressBar', icon: mdiProgressHelper },
-      { name: 'LoadingSpinner', icon: mdiDotsCircle },
-      {
-        name: 'MultiSelect',
-        icon: mdiCheckboxMultipleMarkedOutline,
-        activeIcon: mdiCheckboxMultipleMarked,
-      },
-      { name: 'Select', icon: mdiFormDropdown },
-      { name: 'Switch', icon: mdiToggleSwitchOutline, activeIcon: mdiToggleSwitch },
-      { name: 'DatePicker', icon: mdiCalendar },
+    name: 'ControlBar',
+    icon: mdiApplicationOutline,
+    activeIcon: mdiApplication,
+    items: [{ name: 'ActionBar', icon: mdiCardOutline, activeIcon: mdiCard }],
+  },
+  { name: 'DatePicker', icon: mdiCalendar },
+  { name: 'Field', icon: mdiListBoxOutline, activeIcon: mdiListBox },
+  { name: 'FormatBytes', icon: mdiNumeric },
+  { name: 'GithubLink', icon: siGithub },
+  { name: 'Heading', icon: mdiFormTextbox },
+  { name: 'HelperText', icon: mdiHelpBoxOutline, activeIcon: mdiHelpBox },
+  { name: 'Icon', icon: mdiVectorSquare },
+  { name: 'ImageCarousel', icon: mdiViewCarouselOutline, activeIcon: mdiViewCarousel },
+  { name: 'Input', icon: mdiFormTextbox },
+  { name: 'Kbd', icon: mdiKeyboardVariant },
+  { name: 'Link', icon: mdiLink },
+  { name: 'LoadingSpinner', icon: mdiDotsCircle },
+  { name: 'Logo', icon: mdiImageOutline, activeIcon: mdiImage },
+  { name: 'Markdown', icon: mdiLanguageMarkdownOutline, activeIcon: mdiLanguageMarkdownOutline },
+  { name: 'Meter', icon: mdiGauge },
+  {
+    name: 'Modal',
+    title: 'Modals',
+    icon: mdiWindowMaximize,
+    items: [
+      { name: 'BasicModal', icon: mdiWindowMaximize },
+      { name: 'ConfirmModal', icon: mdiCheckboxOutline },
+      { name: 'FormModal', icon: mdiWindowMaximize },
     ],
   },
-  {
-    title: 'Text',
-    components: [
-      { name: 'Badge', icon: mdiTagOutline, activeIcon: mdiTag },
-      { name: 'Code', icon: mdiCodeBraces },
-      { name: 'CodeBlock', icon: mdiCodeBlockBraces },
-      { name: 'Kbd', icon: mdiKeyboardVariant },
-      { name: 'Text', icon: mdiFormatHeaderPound },
-      { name: 'Textarea', icon: mdiFormTextarea },
-      { name: 'Heading', icon: mdiFormTextbox },
-      { name: 'Link', icon: mdiLink },
-      { name: 'FormatBytes', icon: mdiNumeric },
-    ],
-  },
-  {
-    title: 'Miscellaneous',
-    components: [
-      { name: 'Avatar', icon: mdiAccountCircleOutline, activeIcon: mdiAccountCircle },
-      { name: 'CommandPalette', icon: mdiMenu, activeIcon: mdiMenu },
-      { name: 'Icon', icon: mdiVectorSquare },
-      { name: 'Logo', icon: mdiImageOutline, activeIcon: mdiImage },
-      { name: 'Markdown', icon: mdiLanguageMarkdownOutline, activeIcon: mdiLanguageMarkdownOutline },
-      { name: 'SupporterBadge', icon: mdiPartyPopper },
-      { name: 'ThemeSwitcher', icon: mdiThemeLightDark },
-    ],
-  },
-  {
-    title: 'Design',
-    components: [{ name: 'Colors', icon: mdiPalette }],
-  },
+  { name: 'MultiSelect', icon: mdiCheckboxMultipleMarkedOutline, activeIcon: mdiCheckboxMultipleMarked },
+  { name: 'Navbar', icon: mdiMenu },
+  { name: 'NumberInput', icon: mdiNumeric },
+  { name: 'PasswordInput', icon: mdiFormTextboxPassword },
+  { name: 'PinInput', icon: mdiLockSmart },
+  { name: 'ProgressBar', icon: mdiProgressHelper },
+  { name: 'Select', icon: mdiFormDropdown },
+  { name: 'SupporterBadge', icon: mdiPartyPopper },
+  { name: 'Switch', icon: mdiToggleSwitchOutline, activeIcon: mdiToggleSwitch },
+  { name: 'Scrollable', icon: mdiPanVertical },
+  { name: 'Stack', icon: mdiViewSequentialOutline, activeIcon: mdiViewSequential },
+  { name: 'Table', icon: mdiTable },
+  { name: 'Text', icon: mdiFormatHeaderPound },
+  { name: 'Textarea', icon: mdiFormTextarea },
+  { name: 'ThemeSwitcher', icon: mdiThemeLightDark },
+  { name: 'TimeInput', icon: mdiClockOutline, activeIcon: mdiClock },
+  { name: 'Toast', icon: mdiMessageAlertOutline, activeIcon: mdiMessageAlert },
+  { name: 'Tooltip', icon: mdiInformationSlabCircleOutline, activeIcon: mdiInformationSlabCircle },
 ];
 
 const onAction: ActionItemHandler = (item) => {
@@ -305,7 +286,7 @@ export const carouselImageItems: CarouselImageItem[] = [
   },
 ];
 
-const asCommand = (group: ComponentGroup, component: ComponentItem): ActionItem => {
+const asCommand = (component: ComponentItem): ActionItem => {
   const href = asComponentHref(component.name);
   return {
     icon: component.icon,
@@ -313,18 +294,30 @@ const asCommand = (group: ComponentGroup, component: ComponentItem): ActionItem 
     title: component.name,
     description: `View the ${component.name} component`,
     onAction: () => goto(href),
-    searchText: asText('Component', group.title, component.name, href),
+    extraText: asText(href),
   };
 };
 
-export const componentCommands: ActionItem[] = [];
-
-// components
-for (const group of componentGroups) {
-  for (const component of group.components) {
-    componentCommands.push(asCommand(group, component));
-    for (const item of component.items ?? []) {
-      componentCommands.push(asCommand(group, item));
-    }
+export const getDocsProviders = () => {
+  const commands: ActionItem[] = [];
+  for (const component of components) {
+    commands.push(asCommand(component), ...(component.items ?? []).map(asCommand));
   }
-}
+
+  return [
+    defaultProvider({
+      name: 'Pages',
+      types: ['page', 'pages'],
+      actions: linkCommands([
+        {
+          title: 'Getting started',
+          description: 'Learn how to get started using @immich/ui in your project',
+          href: '/getting-started',
+        },
+        { title: 'Introduction', description: 'A Svelte component library for Immich', href: '/introduction' },
+        { title: 'Components', description: 'List of components', href: '/components' },
+      ]),
+    }),
+    defaultProvider({ name: 'Components', types: ['component', 'components'], actions: commands }),
+  ];
+};

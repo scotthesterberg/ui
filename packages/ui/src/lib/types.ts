@@ -1,6 +1,7 @@
 import type { Shortcut } from '$lib/actions/shortcut.js';
 import type { ChildKey } from '$lib/constants.js';
 import type { Translations } from '$lib/services/translation.svelte.js';
+import type { TimeValue } from 'bits-ui';
 import type { DateTime } from 'luxon';
 import type { Component, Snippet } from 'svelte';
 import type {
@@ -41,6 +42,12 @@ export enum Theme {
   Dark = 'dark',
 }
 
+export enum ThemePreference {
+  Light = 'light',
+  Dark = 'dark',
+  System = 'system',
+}
+
 export type TranslationProps<T extends keyof Translations> = { [K in T]?: string };
 
 export type IconLike = string | { path: string };
@@ -56,8 +63,8 @@ export type NavbarProps = {
   active?: boolean;
   variant?: NavbarVariant;
   isActive?: () => boolean;
-  icon?: string | IconProps;
-  activeIcon?: string | IconProps;
+  icon?: IconLike | IconProps;
+  activeIcon?: IconLike | IconProps;
   expanded?: boolean;
   items?: NavbarProps[] | Snippet;
   class?: string;
@@ -183,6 +190,21 @@ type BaseInputProps<T> = {
 
 export type InputProps = BaseInputProps<string> & {
   type?: HTMLInputAttributes['type'];
+};
+
+export type TimeInputProps = {
+  ref?: HTMLInputElement | null;
+  class?: string;
+  size?: Size;
+  value?: TimeValue;
+  shape?: Shape;
+  granularity?: 'hour' | 'minute' | 'second';
+  leadingIcon?: IconLike | Snippet;
+  trailingIcon?: IconLike | Snippet;
+  containerRef?: HTMLElement | null;
+  onChange?: (value?: TimeValue) => void;
+  minValue?: TimeValue;
+  maxValue?: TimeValue;
 };
 
 export type NumberInputProps = BaseInputProps<number | undefined>;
@@ -339,11 +361,24 @@ export type IfLike = { $if?: () => boolean };
 
 export type ActionItemHandler<T extends ActionItem = ActionItem> = (item: T) => unknown | Promise<unknown>;
 
+export type LinkItem = {
+  title: string;
+  description: string;
+  href: string;
+};
+
+export type ActionItemTag = {
+  value: string;
+  color?: Color;
+  shape: Shape;
+  class?: string;
+};
+
 export type ActionItem = {
   title: string;
   description?: string;
-  type?: string;
-  searchText?: string;
+  extraText?: string | string[];
+  tags?: Array<string | ActionItemTag>;
   icon?: IconLike;
   iconClass?: string;
   color?: Color;
@@ -399,3 +434,25 @@ export type ActionBarProps = ControlBarProps & {
 export type ChildContext = {
   register: (key: ChildKey, data: () => ChildData) => void;
 };
+
+type LinkCommon = {
+  class?: string;
+  underline?: boolean;
+} & Omit<HTMLAnchorAttributes, 'href'>;
+
+export type LinkProps = {
+  children?: Snippet;
+  href: string;
+} & LinkCommon;
+
+export type GithubLinkType = 'issue' | 'pr' | 'discussion';
+
+export type GithubLinkOptions = { org?: string; repo?: string; number?: number; type?: GithubLinkType };
+
+export type GithubLinkProps = {
+  icon?: boolean;
+  size?: Size;
+} & GithubLinkOptions &
+  LinkCommon;
+
+export type MarkdownAlertVariant = 'note' | 'tip' | 'important' | 'warning' | 'caution' | 'info' | 'success' | 'danger';

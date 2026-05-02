@@ -35,7 +35,7 @@ jobs:
         run: pnpm build
 
       - name: Upload build output
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: build-output
           path: packages/ui/build
@@ -59,7 +59,7 @@ jobs:
           path: '${{ github.workspace }}/build'
 
       - name: Install 1Password CLI
-        uses: 1password/install-cli-action@9a0c9dd934086b7ab1d90115d455bda1c53c2bdb # v2.0.2
+        uses: 1password/install-cli-action@8d006a0d0a4fd505af7f7ce589e7f768385ff5e4 # v3.0.0
 
       - name: Install Terragrunt
         uses: eLco/setup-terragrunt@2c5116f8979bb261072ef57c97ac026cd9c27434 # v1.0.3
@@ -93,7 +93,7 @@ jobs:
           wranglerVersion: '3'
 
       - name: Comment
-        uses: actions-cool/maintain-one-comment@4b2dbf086015f892dcb5e8c1106f5fccd6c1476b # v3.2.0
+        uses: actions-cool/maintain-one-comment@909842216bc8e8658364c572ec52100f4c2cc50a # v3.3.0
         if: ${{ github.event_name == 'pull_request' }}
         with:
           number: ${{ github.event.number }}
